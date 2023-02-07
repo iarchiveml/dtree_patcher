@@ -157,14 +157,14 @@ int mount_as_rw (FILE *fp,size_t dtree_len,void* dtree_buf) {
         printf("Failed to find data role string loc string\n");
         return -1;
     }
-    void* data_role = memstr(xart_mount_str_loc, dtree_len, "\x72\x6f");
-    if(!data_role) {
+    void* mount_as = memstr(xart_mount_str_loc, dtree_len, "\x72\x6f");
+    if(!mount_as) {
         printf("Failed to find mount ro\n");
         return -1;
     }
-    printf("Found mount ro at %p\n",GET_OFFSET(dtree_len, data_role));
+    printf("Found mount ro at %p\n",GET_OFFSET(dtree_len, mount_as));
     printf("Changing mount as 0x7277\n");
-    memcpy(data_role,"\x72\x77",0x2);
+    memcpy(mount_as,"\x72\x77",0x2);
     return 1;
     
 }
