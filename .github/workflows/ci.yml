@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        architecture: [arm64]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up GCC
+        uses: actions/setup-gcc@v2
+        with:
+          gcc-version: '11'
+
+      - name: Build and compile
+        run: |
+          gcc -o dtree_patcher dtree_patcher.c
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: dtree_patcher
+          path: .
+
