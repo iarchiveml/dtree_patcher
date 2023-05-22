@@ -2,6 +2,9 @@
 * Copyright 2020, @Ralph0045
 * gcc dtree_patcher.c -o dtree_patcher
 */
+#if defined(__linux__) || defined(__gnu_linux__)
+    #define _GNU_SOURCE
+#endif
 
 #include <stdio.h>
 #include <stdlib.h>
